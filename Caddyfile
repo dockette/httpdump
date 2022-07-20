@@ -1,0 +1,25 @@
+# Listening on
+:8000
+
+# Set the document root of the site.
+root * /srv/public
+
+# Static files
+file_server {
+  hide .git
+}
+
+# Compress the transmitted data
+encode gzip
+
+# Enable logging
+log
+
+# Set the path to the php-fpm process.
+php_fastcgi unix//var/run/php-fpm.sock
+
+# Global options
+{
+  # Disable admin
+  admin off
+}

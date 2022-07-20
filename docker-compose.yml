@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+    httpdump:
+        image: dockette/httpdump
+        ports:
+            - 8000:8000
+        environment:
+            - APP_ENV=development
+            - REDIS_HOST=redis
+        volumes:
+            - .docker/storage:/srv/storage
+
+    redis:
+        image: redis:7-alpine
+        ports:
+            - 6379:6379
