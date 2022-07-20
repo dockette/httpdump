@@ -19,69 +19,38 @@
 
 ## Usage
 
-### Server
-
-Fastest way:
-
 ```
-docker run \
-    -it \
-    --rm \
-    -p 80:80 \
-    -e EXPOSE_HOST=yourdomain.dev \
-    -e EXPOSE_PORT=80 \
-    dockette/httpdump
-```
+version: "3.7"
 
-Persistent way:
+services:
+    httpdump:
+        image: dockette/httpdump
+        ports:
+            - 8000:8000
+        environment:
+            - APP_ENV=local
+            - REDIS_HOST=redis
+        volumes:
+            # Persistence
+            # - .docker/storage:/srv/storage
 
+    redis:
+        image: redis:7-alpine
+        ports:
+            - 6379:6379
 ```
-docker run \
-    -it \
-    --rm \
-    -p 80:80 \
-    -v $(pwd)/data:/data
-    dockette/httpdump
-```
-
-> Use http://host.docker.internal:5000 on OSX.
 
 ## Documentation
 
-You can easily setup Expose via environment variables. This is list of default values.
+You can easily setup HTTPDump via environment variables. This is list of default values.
 
 ```
-- EXPOSE_HOST=localhost         # expose domain
-- EXPOSE_PORT=8000              # expose port
-- EXPOSE_USERNAME=dockette      # dashboard user name
-- EXPOSE_PASSWORD=expose        # dashboard user password
-- EXPOSE_TOKEN=                 # expose token
-- EXPOSE_ADMIN=admin            # dashboard subdomain
-- EXPOSE_DB=/data/expose.db     # expose database (for users)
+- APP_NAME=Dockette
+- APP_ENV=local
+- APP_KEY=base64:sjJo32LB/+B35zImJQNU2idyWUFoZL1KMmo5pPoiGvU=
+- APP_DEBUG=true
+- APP_URL=http://localhost
 ```
-
-For more details, take a look at Expose's [official documentation](https://expose.beyondco.de/docs/server/starting-the-server).
-
-**How to test it?**
-
-```
-# Server
-docker run -it --rm -p 8000:8000 -e EXPOSE_HOST=expose.local dockette/httpdump
-```
-
-```
-echo "Hello world" >> index.php
-
-# Application
-php -S http://0.0.0.0:5000 index.php
-```
-
-```
-# Tunnel (Unix)
-docker run -it --rm --network=host -e EXPOSE_HOST=expose.local dockette/httpdump share --subdomain=foo http://0.0.0.0:5000
-```
-
-> Use http://host.docker.internal:5000 on OSX.
 
 ## Development
 

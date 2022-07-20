@@ -5,15 +5,6 @@ LABEL maintainer="sulcmil@gmail.com"
 # PHP
 ENV TZ=Europe/Prague
 
-# EXPOSE
-ENV EXPOSE_PORT=8000
-ENV EXPOSE_HOST=localhost
-ENV EXPOSE_USERNAME=dockette
-ENV EXPOSE_PASSWORD=expose
-ENV EXPOSE_TOKEN=
-ENV EXPOSE_ADMIN=admin
-ENV EXPOSE_DB=/data/expose.db
-
 # INSTALLATION
 RUN apt update && apt dist-upgrade -y && \
     # DEPENDENCIES #############################################################
