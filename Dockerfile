@@ -40,9 +40,9 @@ RUN apt update && apt dist-upgrade -y && \
         php7.4-redis \
         php7.4-zip && \
     # COMPOSER #################################################################
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --2
-    # EXPOSE APP ###############################################################
-RUN git clone https://github.com/beyondcode/httpdump.git /srv && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --2 && \
+    # HTTPDUMP #################################################################
+    git clone https://github.com/beyondcode/httpdump.git /srv && \
     composer -d /srv install  && \
     mkdir -p /srv/storage && \
     chmod 0755 /srv/storage && \
