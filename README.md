@@ -1,7 +1,7 @@
 <h1 align=center>Dockette / HTTPDump</h1>
 
 <p align=center>
-   Inspect HTTP requests using HTTP Dump app written in PHP.
+   Inspect HTTP requests using <a href="https://github.com/beyondcode/httpdump">httpdump</a> app.
 </p>
 
 <p align=center>
