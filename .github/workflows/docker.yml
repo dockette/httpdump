@@ -1,35 +1,51 @@
-name: Docker
+name: "Docker"
 
 on:
+  workflow_dispatch:
+
   push:
-    branches: master
+    branches: ["master"]
+
+  schedule:
+    - cron: "0 8 * * 1"
 
 permissions:
   contents: read
 
 jobs:
-  docker:
+  test:
+    name: "Test"
     runs-on: ubuntu-latest
 
-    name: Docker (dockette/httpdump)
-
     steps:
-      - name: Checkout
+      - name: "Checkout"
         uses: actions/checkout@v4
 
-      - name: Login to DockerHub
+      - name: "Test image"
+        run: "make test"
+
+  build:
+    name: "Build"
+    needs: ["test"]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      - name: "Login to DockerHub"
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set up QEMU
+      - name: "Set up QEMU"
         uses: docker/setup-qemu-action@v3
 
-      - name: Set up Docker Buildx
+      - name: "Set up Docker Buildx"
         uses: docker/setup-buildx-action@v3
 
-      - name: Cache Docker layers
+      - name: "Cache Docker layers"
         uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
@@ -37,7 +53,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      - name: Build and push
+      - name: "Build and push"
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -46,3 +62,20 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           platforms: linux/amd64,linux/arm64
+
+  docs:
+    name: "Docs"
+    needs: ["build"]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      - name: "Update Docker Hub description"
+        uses: peter-evans/dockerhub-description@v5
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: "dockette/httpdump"

@@ -1,18 +1,14 @@
 <h1 align=center>Dockette / HTTPDump</h1>
 
 <p align=center>
+   <a href="https://github.com/dockette/httpdump/actions"><img src="https://github.com/dockette/httpdump/actions/workflows/docker.yml/badge.svg" alt="GitHub Actions"></a>
+   <a href="https://hub.docker.com/r/dockette/httpdump"><img src="https://img.shields.io/docker/pulls/dockette/httpdump.svg" alt="Docker Hub pulls"></a>
+   <a href="https://github.com/sponsors/f3l1x"><img src="https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ea4aaa" alt="GitHub Sponsors"></a>
+   <a href="https://github.com/orgs/dockette/discussions"><img src="https://img.shields.io/badge/support-discussions-6f42c1" alt="Support/Discussions"></a>
+</p>
+
+<p align=center>
    Inspect HTTP requests using <a href="https://github.com/beyondcode/httpdump">httpdump</a> app.
-</p>
-
-<p align=center>
-🕹 <a href="https://f3l1x.io">f3l1x.io</a> | 💻 <a href="https://github.com/f3l1x">f3l1x</a> | 🐦 <a href="https://twitter.com/xf3l1x">@xf3l1x</a>
-</p>
-
-<p align=center>
-    <a href="https://hub.docker.com/r/dockette/httpdump/"><img src="https://img.shields.io/docker/stars/dockette/httpdump.svg?style=flat-square"></a>
-    <a href="https://hub.docker.com/r/dockette/httpdump/"><img src="https://img.shields.io/docker/pulls/dockette/httpdump.svg?style=flat-square"></a>
-    <a href="https://bit.ly/ctteg"><img src="https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square"></a>
-    <a href="https://github.com/sponsors/f3l1x"><img src="https://img.shields.io/badge/sponsor-me-brightgreen?style=flat-square"></a>
 </p>
 
 -----
@@ -54,14 +50,12 @@ You can easily setup HTTPDump via environment variables. This is list of default
 
 ## Development
 
-See [how to contribute](https://contributte.org/contributing.html) to this package.
+```sh
+make build
+make test
+make run
+```
 
-This package is currently maintaining by these authors.
+## Maintenance
 
-<a href="https://github.com/f3l1x">
-    <img width="80" height="80" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=80">
-</a>
-
------
-
-Consider to [support](https://github.com/sponsors/f3l1x) **f3l1x**. Also thank you for using this package.
+See [how to contribute](https://github.com/dockette/.github/blob/master/CONTRIBUTING.md) to this package. Consider to [support](https://github.com/sponsors/f3l1x) **f3l1x**. Thank you for using this package.
