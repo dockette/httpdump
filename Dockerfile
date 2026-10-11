@@ -1,4 +1,4 @@
-FROM dockette/debian:bullseye-slim
+FROM debian:trixie-slim
 
 LABEL maintainer="sulcmil@gmail.com"
 
@@ -10,8 +10,7 @@ RUN apt update && apt dist-upgrade -y && \
     # DEPENDENCIES #############################################################
     apt install -y wget curl apt-transport-https ca-certificates git unzip && \
     wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
-    echo "deb https://packages.sury.org/php/ bullseye main" > /etc/apt/sources.list.d/php.list && \
-    echo "deb [trusted=yes] https://apt.fury.io/caddy/ /" > /etc/apt/sources.list.d/caddy-fury.list && \
+    echo "deb https://packages.sury.org/php/ trixie main" > /etc/apt/sources.list.d/php.list && \
     apt update && \
     # CADDY ####################################################################
     apt install -y --no-install-recommends \
