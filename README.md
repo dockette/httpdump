@@ -17,9 +17,18 @@
 
 -----
 
+Inspect HTTP requests using the [httpdump](https://github.com/beyondcode/httpdump) app, served by Caddy and PHP-FPM.
+
+## Features
+
+- httpdump from `beyondcode/httpdump` (`master` at build time) on `debian:trixie-slim`
+- Caddy and PHP `7.4` (PHP-FPM) with Redis support
+- Listens on port `8000`
+- `linux/amd64` and `linux/arm64`
+
 ## Usage
 
-```
+```yml
 version: "3.7"
 
 services:
@@ -40,33 +49,39 @@ services:
             - 6379:6379
 ```
 
-## Documentation
+## Configuration
 
-You can easily setup HTTPDump via environment variables. This is list of default values.
+Set these environment variables. The values below are the defaults.
 
-```
-- APP_NAME=Dockette
-- APP_ENV=local
-- APP_KEY=base64:sjJo32LB/+B35zImJQNU2idyWUFoZL1KMmo5pPoiGvU=
-- APP_DEBUG=true
-- APP_URL=http://localhost
+```sh
+APP_NAME=Dockette
+APP_ENV=local
+APP_KEY=base64:sjJo32LB/+B35zImJQNU2idyWUFoZL1KMmo5pPoiGvU=
+APP_DEBUG=true
+APP_URL=http://localhost
 ```
 
 ## Versions
 
-The release version is the date in [`VERSION`](VERSION). CI pushes `latest` also as `dockette/httpdump:<VERSION>`.
-To release, run `make release`, commit and push to `master`.
+| Version | Release |
+|---------|---------|
+| `dockette/httpdump:YYYY.MM.DD` | release `YYYY.MM.DD` |
+| `dockette/httpdump:latest` | latest build of `master` |
+
+Releases are listed on [GitHub](https://github.com/dockette/httpdump/releases).
 
 ## Development
 
-See [how to contribute](https://contributte.org/contributing.html) to this package.
+```sh
+make docker-build   # build the image
+make docker-push    # push the image
+make test-up        # start httpdump and Redis with docker-compose
+make test-in        # open a shell in the httpdump container
+make version        # print VERSION
+make release        # set today's date in VERSION
+```
 
-This package is currently maintaining by these authors.
+## Maintenance
 
-<a href="https://github.com/f3l1x">
-    <img width="80" height="80" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=80">
-</a>
-
------
-
-Consider to [support](https://github.com/sponsors/f3l1x) **f3l1x**. Also thank you for using this package.
+See [how to contribute](https://github.com/dockette/.github/blob/master/CONTRIBUTING.md) to this package. Consider to
+[support](https://github.com/sponsors/f3l1x) **f3l1x**. Thank you for using this package.
